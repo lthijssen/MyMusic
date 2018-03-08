@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="MyMusicProject/Resources/MyMusicAPI"/>
+            <con:binding>
+                <con:name>MyMusicAPI_ptt-binding</con:name>
+                <con:namespace>http://xmlns.oracle.com/MyMusicApplication/MyMusicProject/MyMusicAPI</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-N53e1ffe2.db436ad.0.16205d40110.N8000">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ffe" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53e1ffe2.db436ad.0.16205d40110.N7fff">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ffd" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:replace varName="body" contents-only="true">
+                        <con2:id>_ActionId-N53e1ffe2.db436ad.0.16205d40110.N7fea</con2:id>
+                        <con1:expr>
+                            <con2:xsltTransform>
+                                <con2:resource ref="MyMusicProject/Transformations/GetAlbumsMock"/>
+                                <con2:input>$body/*</con2:input>
+                            </con2:xsltTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N53e1ffe2.db436ad.0.16205d40110.N7ffc">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ffa" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53e1ffe2.db436ad.0.16205d40110.N7ffb">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ff9" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-N53e1ffe2.db436ad.0.16205d40110.N7fe7</con2:id>
+                        <con1:expr>
+                            <con2:xsltTransform>
+                                <con2:resource ref="MyMusicProject/Transformations/GetAlbumByIdMock"/>
+                                <con2:input>$body/*</con2:input>
+                            </con2:xsltTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N53e1ffe2.db436ad.0.16205d40110.N7ff8">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ff6" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53e1ffe2.db436ad.0.16205d40110.N7ff7">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ff5" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-N53e1ffe2.db436ad.0.16205d40110.N7fe4</con2:id>
+                        <con1:expr>
+                            <con2:xsltTransform>
+                                <con2:resource ref="MyMusicProject/Transformations/CreateAlbumMock"/>
+                                <con2:input>$body/*</con2:input>
+                            </con2:xsltTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N53e1ffe2.db436ad.0.16205d40110.N7ff4">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ff2" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53e1ffe2.db436ad.0.16205d40110.N7ff3">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7ff1" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:assign varName="albumId">
+                        <con2:id>_ActionId-N53e1ffe2.db436ad.0.16205d40110.N7fc0</con2:id>
+                        <con1:expr>
+                            <con2:xqueryText>$inbound/ctx:transport/ctx:request/tp:user-metadata[@name='id']/@value</con2:xqueryText>
+                        </con1:expr>
+                    </con1:assign>
+                    <con1:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-N53e1ffe2.db436ad.0.16205d40110.N7fe1</con2:id>
+                        <con1:expr>
+                            <con2:xsltTransform>
+                                <con2:resource ref="MyMusicProject/Transformations/UpdateAlbumMock2"/>
+                                <con2:input>$body/*</con2:input>
+                                <con2:param name="albumId">
+                                    <con2:path>$albumId</con2:path>
+                                </con2:param>
+                            </con2:xsltTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="request" name="request-N53e1ffe2.db436ad.0.16205d40110.N7ff0">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7fee" name="Stage1">
+                <con:context/>
+                <con:actions/>
+            </con:stage>
+        </con:pipeline>
+        <con:pipeline type="response" name="response-N53e1ffe2.db436ad.0.16205d40110.N7fef">
+            <con:stage id="_StageId-N53e1ffe2.db436ad.0.16205d40110.N7fed" name="Stage1">
+                <con:context/>
+                <con:actions>
+                    <con1:replace contents-only="true" varName="body">
+                        <con2:id>_ActionId-N53e1ffe2.db436ad.0.16205d40110.N7fde</con2:id>
+                        <con1:expr>
+                            <con2:xsltTransform>
+                                <con2:resource ref="MyMusicProject/Transformations/DeleteAlbumMock"/>
+                                <con2:input>$body/*</con2:input>
+                            </con2:xsltTransform>
+                        </con1:expr>
+                    </con1:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:branch-node type="operation" id="_FlowId-N3f57c7ff.N78f5c803.0.16202a76a06.N8000" name="BranchNode1">
+                <con:context/>
+                <con:branch-table>
+                    <con:branch name="getAlbums">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Pipeline Pair Node1">
+                                <con:request>request-N53e1ffe2.db436ad.0.16205d40110.N8000</con:request>
+                                <con:response>response-N53e1ffe2.db436ad.0.16205d40110.N7fff</con:response>
+                            </con:pipeline-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="getAlbumById">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Pipeline Pair Node2">
+                                <con:request>request-N53e1ffe2.db436ad.0.16205d40110.N7ffc</con:request>
+                                <con:response>response-N53e1ffe2.db436ad.0.16205d40110.N7ffb</con:response>
+                            </con:pipeline-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="createAlbum">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Pipeline Pair Node3">
+                                <con:request>request-N53e1ffe2.db436ad.0.16205d40110.N7ff8</con:request>
+                                <con:response>response-N53e1ffe2.db436ad.0.16205d40110.N7ff7</con:response>
+                            </con:pipeline-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="updateAlbum">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Pipeline Pair Node4">
+                                <con:request>request-N53e1ffe2.db436ad.0.16205d40110.N7ff4</con:request>
+                                <con:response>response-N53e1ffe2.db436ad.0.16205d40110.N7ff3</con:response>
+                            </con:pipeline-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:branch name="deleteAlbum">
+                        <con:operator>equals</con:operator>
+                        <con:value/>
+                        <con:flow>
+                            <con:pipeline-node name="Pipeline Pair Node5">
+                                <con:request>request-N53e1ffe2.db436ad.0.16205d40110.N7ff0</con:request>
+                                <con:response>response-N53e1ffe2.db436ad.0.16205d40110.N7fef</con:response>
+                            </con:pipeline-node>
+                        </con:flow>
+                    </con:branch>
+                    <con:default-branch>
+                        <con:flow/>
+                    </con:default-branch>
+                </con:branch-table>
+            </con:branch-node>
+        </con:flow>
+        <con:shared-variables>
+            <con:variable>albumId</con:variable>
+        </con:shared-variables>
+    </con:router>
+</con:pipelineEntry>

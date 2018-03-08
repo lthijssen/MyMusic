@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema nxsd:version="JSON"
+            nxsd:jsonTopLevelArray="true"
+            xmlns:nxsd="http://xmlns.oracle.com/pcbpel/nxsd"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.undertheredcloud.org/api/mymusic"
+            xmlns:tns="http://www.undertheredcloud.org/api/mymusic"
+            elementFormDefault="qualified">
+  <xsd:element name="getAlbumsRequest" type="xsd:string"/>
+  <xsd:element name="getAlbumsResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="albums" type="tns:tAlbums" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="getAlbumByIdRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="id" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="getAlbumByIdResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="albums" type="tns:tAlbums" minOccurs="0"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+   <xsd:element name="createAlbumRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="albums" type="tns:tAlbums"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="createAlbumResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="albums" type="tns:tAlbums"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="updateAlbumRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="albums" type="tns:tAlbums"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="updateAlbumResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="albums" type="tns:tAlbums"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="deleteAlbumRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="id" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="deleteAlbumResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="result" type="xsd:string"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="tAlbums">
+    <xsd:sequence>
+      <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="artist" type="xsd:string"/>
+      <xsd:element name="title" type="xsd:string"/>
+      <xsd:element name="year" type="xsd:integer"/>
+      <xsd:element name="genre" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

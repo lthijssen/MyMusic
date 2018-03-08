@@ -1,0 +1,54 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://www.undertheredcloud.org/api/mymusic" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="MyMusicAPI">RestService</doc>
+   <grammars>
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:import namespace="http://www.undertheredcloud.org/api/mymusic" schemaLocation="../Schemas/MyMusic.xsd"/>
+        </xsd:schema>
+   </grammars>
+   <resources>
+      <resource path="/">
+         <method name="GET" soa:wsdlOperation="getAlbums">
+            <request soa:paramElement="pns:getAlbumsRequest" xmlns:pns="http://www.undertheredcloud.org/api/mymusic"/>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:getAlbumsResponse" xmlns:cns="http://www.undertheredcloud.org/api/mymusic"/>
+            </response>
+         </method>
+         <method name="POST" soa:wsdlOperation="createAlbum">
+            <request>
+               <representation mediaType="application/json" element="cns:createAlbumRequest" xmlns:cns="http://www.undertheredcloud.org/api/mymusic"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:createAlbumResponse" xmlns:cns="http://www.undertheredcloud.org/api/mymusic"/>
+            </response>
+         </method>
+      </resource>
+      <resource path="/{id}">
+         <method name="GET" soa:wsdlOperation="getAlbumById">
+            <request soa:paramElement="pns:getAlbumByIdRequest" xmlns:pns="http://www.undertheredcloud.org/api/mymusic">
+               <param name="id" style="template" soa:expression="$msg.request/tns:id" type="xsd:string"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:getAlbumByIdResponse" xmlns:cns="http://www.undertheredcloud.org/api/mymusic"/>
+            </response>
+         </method>
+         <method name="PUT" soa:wsdlOperation="updateAlbum">
+            <request>
+               <param name="id" style="template" soa:expression="$property.id" type="xsd:string"/>
+               <representation mediaType="application/json" element="cns:updateAlbumRequest" xmlns:cns="http://www.undertheredcloud.org/api/mymusic"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:updateAlbumResponse" xmlns:cns="http://www.undertheredcloud.org/api/mymusic"/>
+            </response>
+         </method>
+         <method name="DELETE" soa:wsdlOperation="deleteAlbum">
+            <request soa:paramElement="pns:deleteAlbumRequest" xmlns:pns="http://www.undertheredcloud.org/api/mymusic">
+               <param name="id" style="template" soa:expression="$msg.request/tns:id" type="xsd:string"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/json" element="cns:deleteAlbumResponse" xmlns:cns="http://www.undertheredcloud.org/api/mymusic"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>
